@@ -1,97 +1,43 @@
-import {Component,OnInit} from '@angular/core';
-import {HeroService} from './hero.service';
-
-
-export class Hero{
-	id:number;
-	name:string;
-}
-
-
-	
-
+import { Component } from '@angular/core';
 @Component({
   selector: 'app',
-//  templateUrl: './app.component.html',
-	template:`<h1>{{title}}</h1>
-						<ul class="heroes">
-							<li *ngFor="let d of heroes" (click)="onSelect(d)" [class.selected]="d===selectedHero">
-								<span class="badge">{{d.id}}</span>{{d.name}}
-							</li>
-						</ul>
-						<hero-detail [hero]="selectedHero"></hero-detail>`,
-	styles: [`
-  .selected {
-    background-color: #CFD8DC !important;
-    color: white;
-  }
-  .heroes {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-  }
-  .heroes li {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-  }
-  .heroes li.selected:hover {
-    background-color: #BBD8DC !important;
-    background-color: red ;
-
-    color: white;
-  }
-  .heroes li:hover {
-    color: #607D8B;
-    background-color: #DDD;
-    left: .1em;
-  }
-  .heroes .text {
-    position: relative;
-    top: -3px;
-  }
-  .heroes .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
-`],
-	providers:[HeroService]
+  template: `
+    <h1>{{title}}</h1>
+    <nav>
+	    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+	    <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+    </nav>
+   	<router-outlet></router-outlet>    
+  `,
+  styles: [`h1 {
+  font-size: 1.2em;
+  color: #999;
+  margin-bottom: 0;
+}
+h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+nav a:visited, a:link {
+  color: #607D8B;
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color: #039be5;
+}`]
 })
 export class AppComponent {
-	title = 'Tour of COOP';
-	heroes : Hero[];//HEROES;
-	selectedHero: Hero;// = this.hero;
-
-	constructor(private heroService:HeroService){
-	}
-
-	onSelect(d: Hero):void{
-		this.selectedHero = d;
-	}
-	getHeroes():void{
-//		this.heroService.getHeroes().then(heroes => this.heroes = heroes);
-		this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
-		//this.heroes = this.heroService.getHeroes();
-	}
-	ngOnInit():void{
-		this.getHeroes();
-	}
+  title = 'Tour of Heroes';
 }
-
-
