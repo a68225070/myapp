@@ -23,6 +23,9 @@ import {HeroService} from './hero.service';
 import { RouterModule }   from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { AppRoutingModule }     from './app-routing.module';
+import { HttpModule }    from '@angular/http';
+import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
 
 @NgModule({
   declarations: [
@@ -41,8 +44,9 @@ import { AppRoutingModule }     from './app-routing.module';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    /*ReactiveFormsModule,
     HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),    
+    /*ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: true })*/
   ],
   providers: [
